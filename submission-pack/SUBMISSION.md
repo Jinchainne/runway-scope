@@ -10,7 +10,9 @@ RunwayScope is a standalone GenLayer Intelligent Contract that determines whethe
 
 ## Evidence
 
-- Repository: pending
-- Contract source: pending
-- Behavioral tests: pending
-- Bradbury contract: pending deployment
+- Repository: https://github.com/Jinchainne/runway-scope
+- Contract source: https://github.com/Jinchainne/runway-scope/blob/main/contracts/runway_scope.py
+- Behavioral tests: https://github.com/Jinchainne/runway-scope/blob/main/tests/test_contract_behavior.py
+- Architecture: https://github.com/Jinchainne/runway-scope/blob/main/docs/ARCHITECTURE.md
+- Bradbury contract: https://explorer-bradbury.genlayer.com/address/0x0b45bb9a2d542C46FD4a615E32AB3107507f0DEc
+- Deployment transaction: https://explorer-bradbury.genlayer.com/tx/0xc8299a66c4d358182c9e831d8d949900aa29b7f26c34ffc51c694a0d6a70fdc7

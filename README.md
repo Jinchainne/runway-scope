@@ -6,6 +6,18 @@ RunwayScope is a standalone GenLayer Intelligent Contract. It binds official FAA
 
 > RunwayScope is an evidence-indexing primitive, not operational or safety advice. Always use authoritative aviation channels and qualified dispatch personnel.
 
+## Live release
+
+| Surface | Value |
+| --- | --- |
+| Repository | [github.com/Jinchainne/runway-scope](https://github.com/Jinchainne/runway-scope) |
+| Network | GenLayer Bradbury testnet |
+| Contract | [`0x0b45...0DEc`](https://explorer-bradbury.genlayer.com/address/0x0b45bb9a2d542C46FD4a615E32AB3107507f0DEc) |
+| Deployment transaction | [`0xc829...fdc7`](https://explorer-bradbury.genlayer.com/tx/0xc8299a66c4d358182c9e831d8d949900aa29b7f26c34ffc51c694a0d6a70fdc7) |
+| Deployment status | `ACCEPTED / AGREE / FINISHED_WITH_RETURN` |
+
+Bradbury GEN is faucet-issued test currency with no promised monetary value.
+
 ## Why GenLayer is essential
 
 A deterministic contract can validate timestamps and hostnames but cannot interpret whether natural-language notices actually apply to one operation. RunwayScope uses GenLayer-native consensus:
