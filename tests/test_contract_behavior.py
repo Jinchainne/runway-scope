@@ -190,6 +190,37 @@ class RunwayScopeBehaviorTest(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, "not eligible"):
             self.contract.assess_window("ATL-09L-001")
 
+    def test_consensus_rejects_condition_or_evidence_drift(self):
+        record = self.record()
+        excerpt = "Official evidence " * 2
+        leader = {
+            "result": "CONDITIONAL_OPERATION",
+            "restriction_codes": ["AIRCRAFT_LIMIT"],
+            "conditions": "Heavy aircraft require a taxi escort during the window.",
+            "reasoning": "The bound notice imposes a concrete aircraft condition for this window.",
+            "source_bindings": {"notam": "BOUND", "nas": "UNBOUND", "weather": "UNBOUND"},
+            "grounded_excerpts": {"notam": excerpt, "nas": "", "weather": ""},
+        }
+        self.module.gl.nondet.exec_prompt = lambda *_args, **_kwargs: leader
+        captured = {}
+
+        def run(leader_fn, validator_fn):
+            captured["validator"] = validator_fn
+            return leader_fn()
+
+        self.module.gl.vm.run_nondet_unsafe = run
+        result = self.contract._assess(record)
+        self.assertEqual(result["conditions"], leader["conditions"])
+        returned = object.__new__(self.module.gl.vm.Return)
+        returned.calldata = result
+        self.assertTrue(captured["validator"](returned))
+        for field, changed in (("conditions", "A different condition."), ("grounded_excerpts", {"notam": "Other evidence", "nas": "", "weather": ""}), ("snapshot_digests", {"notam": "d" * 64, "nas": "b" * 64, "weather": "c" * 64})):
+            drifted = dict(result)
+            drifted[field] = changed
+            candidate = object.__new__(self.module.gl.vm.Return)
+            candidate.calldata = drifted
+            self.assertFalse(captured["validator"](candidate))
+
 
 if __name__ == "__main__":
     unittest.main()

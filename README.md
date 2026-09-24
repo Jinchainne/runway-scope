@@ -27,7 +27,7 @@ A deterministic contract can validate timestamps and hostnames but cannot interp
 3. Validators classify every source as `BOUND`, `UNBOUND`, or `UNAVAILABLE`.
 4. Every bound source requires a literal grounded excerpt and a SHA-256 snapshot digest.
 5. `gl.nondet.exec_prompt(...)` returns a strict applicability schema.
-6. `gl.vm.run_nondet_unsafe(...)` requires agreement on the result, restriction codes, and source bindings.
+6. `gl.vm.run_nondet_unsafe(...)` requires agreement on the result, restriction codes, conditions, source bindings, snapshot digests, and grounded excerpts. A validator cannot accept a different concrete operational condition or evidence snapshot.
 7. Consensus materially updates persistent contract state.
 
 ## Workflow
@@ -89,6 +89,8 @@ runway-scope/
 Writes: `register_window`, `assess_window`.
 
 Views: `get_window`, `list_window_ids`, `get_policy`.
+
+The current release is contract-first: callers submit `register_window` and `assess_window` through a GenLayer-compatible wallet/client and read the resulting state with the view methods above. The contract is the source of truth; a UI must not treat a transaction hash as an assessment until the receipt is finalized and `get_window` returns the persisted result.
 
 ## Verification
 

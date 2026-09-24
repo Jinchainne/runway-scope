@@ -309,7 +309,10 @@ Every BOUND source requires a verbatim excerpt no longer than 500 characters. Ot
                 isinstance(leader, dict)
                 and leader.get("result") == validator.get("result")
                 and leader.get("restriction_codes") == validator.get("restriction_codes")
+                and leader.get("conditions") == validator.get("conditions")
                 and leader.get("source_bindings") == validator.get("source_bindings")
+                and leader.get("snapshot_digests") == validator.get("snapshot_digests")
+                and leader.get("grounded_excerpts") == validator.get("grounded_excerpts")
                 and len(str(leader.get("reasoning", ""))) >= MIN_TEXT
                 and len(str(validator.get("reasoning", ""))) >= MIN_TEXT
             )
